@@ -16,7 +16,7 @@ class CreateParagraphphotosTable extends Migration
         Schema::create('paragraphphotos', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('paragraph_id')->unsigned();
-            $table->foreign('paragraph_id')->references('id')->on('paragraphs');
+            $table->foreign('paragraph_id')->references('id')->on('paragraphs')->onDelete('cascade');
             $table->string('filename');
             $table->timestamps();
         });

@@ -18,11 +18,15 @@ class CreateBlogsTable extends Migration
             $table->increments('id');
             $table->integer('user_id')->unsigned();
             $table->foreign('user_id')->references('id')->on('users');
-            $table->string('title');
-            $table->text('introduction');
-            $table->text('body');
+            $table->string('title');  
+           
+            $table->text('body')->nullable();
            
             $table->string('video')->nullable();
+            $table->string('slider_name');
+            $table->boolean('status');
+            $table->boolean('featured');
+            $table->boolean('subfeatured');
             $table->timestamps();
         });
     }

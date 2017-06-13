@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Blog;
+use App\Role;
+use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -11,7 +13,9 @@ use Illuminate\Support\Facades\Validator;
 use App\Photo;
 use App\Paragraph;
 use App\Paragraphphoto;
+use App\Slider;
 use Input;
+
 class BlogsController extends Controller
 {
     /**
@@ -28,6 +32,86 @@ class BlogsController extends Controller
         
 
         return view('blogsindex',['blogs' => $blogs]);
+    }
+
+
+    public function search()
+    {
+        $featuredblog = Blog::whereStatusAndFeatured(1,1)->first();
+
+
+         
+
+        
+        $subfeaturedblogs = Blog::whereStatusAndSubfeatured(1,1)->get();
+
+     
+
+         $blogs =  Blog::where('status', 1)->where('featured',0)->where('subfeatured',0)->orderBy('created_at','asc')->paginate(3);
+
+       
+
+         return view('blogsearch',['featuredblog' => $featuredblog,'subfeaturedblogs' =>$subfeaturedblogs,'blogs' => $blogs]);
+    }
+
+
+
+
+    public function featureblog(Request $request,$id)
+
+    {
+
+        $featuredblog = Blog::find($id);
+
+
+        if($featuredblog->featured){
+
+                DB::table('blogs')
+                    ->where('id', $id)
+                    ->update(['featured'=> 0]);
+
+            }
+            
+            else{
+                DB::table('blogs')
+                    ->where('id', $id)
+                    ->update(['featured'=> 1]);
+
+            }
+
+            
+
+            
+
+             $blogs = Blog::all();
+             return view('blogsindex',['blogs' => $blogs]);
+    }
+
+    public function subfeatureblog(Request $request,$id)
+    {
+             $subfeaturedblog = Blog::find($id);
+        if($subfeaturedblog->subfeatured){
+
+                DB::table('blogs')
+                    ->where('id', $id)
+                    ->update(['subfeatured'=> 0]);
+
+            }
+            
+            else{
+                DB::table('blogs')
+                    ->where('id', $id)
+                    ->update(['subfeatured'=> 1]);
+
+            }
+
+            
+
+            
+
+             $blogs = Blog::all();
+             return view('blogsindex',['blogs' => $blogs]);
+
     }
 
     /**
@@ -54,24 +138,6 @@ class BlogsController extends Controller
         
 
         
-        $validation = Validator::make($request->all(), [
-        'title'  => 'required',
-        
-        'introduction'  => 'required',
-        
-        'body'  => 'required',
-        'video' => 'required'
-
-        
-      ]);
-
-      
-
-        $photos = count($request->photos);
-        foreach(range(0, $photos) as $index) {
-            $rules['photos.' . $index] = 'image|mimes:jpeg,bmp,png';
-        }
-
 
          $newStory = new Blog;
 
@@ -79,18 +145,24 @@ class BlogsController extends Controller
         
 
          $newStory->title = $request->title;
-         $newStory->introduction = $request->introduction;
+      
          $newStory->body = $request->body;
          
          $newStory->video = $request->video;
+          $newStory->slider_name = $request->input('slider_name');
          $newStory->user_id = Auth::id();
+
+         $newStory->status = false;
+         $newStory->featured = false;
+         $newStory->subfeatured = false;
 
          $newStory->save();
 
+if ($request->hasFile('photo')) {
 
 
-         foreach ($request->photos as $photo) {
-            $filename = $photo->store('public/photos');
+         
+            $filename = $request->photo->store('public/photos');
 
 
           
@@ -98,10 +170,16 @@ class BlogsController extends Controller
                 'blog_id' => $newStory->id,
                 'filename' => $filename
             ]);
-        }
+        
+    }
 
+if ($request->tags) {
+
+         
 
          $tags = $request->tags;
+
+
 
          foreach($tags as $tag){
 
@@ -119,6 +197,7 @@ class BlogsController extends Controller
 
             
          }
+     }
 
 }
 
@@ -128,7 +207,7 @@ class BlogsController extends Controller
      * @param  \App\Blog  $blog
      * @return \Illuminate\Http\Response
      */
-    public function show(Blog $blog)
+    public function show($id)
 
 
     {   
@@ -136,16 +215,22 @@ class BlogsController extends Controller
        // $paragraphs =  DB::table('paragraphs')->where('blog_id',$blog->id)->get();
 
             
-                 $paragraphs  = Blog::find($blog->id)->paragraphs;
+                 $paragraphs  = Blog::find($id)->paragraphs;
+
+
 
                      
 
 
-       $images = Blog::find($blog->id)->photos;
+      $blog = Blog::find($id);
+      $image = $blog->photo;
+      $slider = Slider::where('body',$blog->slider_name)->first();
+
+      // $images = DB::table('photos')->where('blog_id',$blog->id)->pluck('filename');  
           
        
         
-        return view('blogdisplay',['blog' => $blog,'images' =>  $images,'paragraphs'=> $paragraphs]);
+        return view('blogdisplay',['blog' => $blog,'image' =>  $image,'paragraphs'=> $paragraphs,'slider' => $slider]);
     }
 
     /**
@@ -156,7 +241,8 @@ class BlogsController extends Controller
      */
     public function edit(Blog $blog)
     {
-        //
+    
+
     }
 
     /**
@@ -166,9 +252,42 @@ class BlogsController extends Controller
      * @param  \App\Blog  $blog
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Blog $blog)
+    public function update(Request $request, $id)
     {
-        //
+
+
+       
+
+        
+
+
+         $blog = Blog::find($id);
+            
+
+            if($blog->status){
+
+                DB::table('blogs')
+                    ->where('id', $id)
+                    ->update(['status'=> 0]);
+
+            }
+            
+            else{
+                DB::table('blogs')
+                    ->where('id', $id)
+                    ->update(['status'=> 1]);
+
+            }
+
+            
+
+            
+
+             $blogs = Blog::all();
+
+        
+
+        return view('blogsindex',['blogs' => $blogs]);
     }
 
     /**
@@ -177,8 +296,18 @@ class BlogsController extends Controller
      * @param  \App\Blog  $blog
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Blog $blog)
+    public function destroy($id)
     {
-        //
+        DB::table('blogs')
+            ->where('id', $id)
+            ->delete();
+            
+             $blogs = Blog::all();
+
+        
+
+        
+
+        return view('blogsindex',['blogs' => $blogs]);
     }
 }

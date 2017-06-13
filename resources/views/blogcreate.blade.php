@@ -10,7 +10,7 @@
                <h1>Create New Adventure</h1>
 
                 <div>
-                    <form novalidate="novalidate" class="form-horizontal" method="POST"  action="/blogs" enctype="multipart/form-data">
+                    <form novalidate="novalidate" class="form-horizontal" method="POST"  action="/blogs/create" enctype="multipart/form-data">
                         {{ csrf_field() }}
 
                         <div class="form-group{{ $errors->has('title') ? ' has-error' : '' }}">
@@ -27,22 +27,11 @@
                             </div>
                         </div>
 
+                        
+
                        
 
-                        <div class="form-group{{ $errors->has('introduction') ? ' has-error' : '' }}">
-                            <label for="name" class="col-md-4 control-label">Introduction</label>
-
-                            <div class="col-md-12">
-                                <textarea id="introduction" type="text" class="form-control" rows="15" name="introduction"  required autofocus>{!! old('introduction') !!}</textarea>
-
-                                @if ($errors->has('introduction'))
-                                    <span class="help-block">
-                                        <strong>{{ $errors->first('introduction') }}</strong>
-                                    </span>
-                                @endif
-                            </div>
-                        </div>
-
+                       
                         
                        
                         <div class="form-group{{ $errors->has('tags') ? ' has-error' : '' }}">
@@ -86,16 +75,16 @@
                         </div>
 
 
-                        <div class="form-group{{ $errors->has('photos') ? ' has-error' : '' }}">
-                            <label for="photos" class="col-md-4 control-label">Images
+                        <div class="form-group{{ $errors->has('photo') ? ' has-error' : '' }}">
+                            <label for="photos" class="col-md-4 control-label">Image
                             </label>
 
                             <div class="col-md-12">
-                                <input id="photos" type="file" class="form-control" name="photos[]" multiple value="{{ old('photos[]') }}" required> 
+                                <input id="photos" type="file" class="form-control" name="photo"  value="{{ old('photo') }}" required> 
 
-                                @if ($errors->has('photos'))
+                                @if ($errors->has('photo'))
                                     <span class="help-block">
-                                        <strong>{{ $errors->first('photos') }}</strong>
+                                        <strong>{{ $errors->first('photo') }}</strong>
                                     </span>
                                 @endif
                             </div>
@@ -113,6 +102,23 @@
                                 @if ($errors->has('video'))
                                     <span class="help-block">
                                         <strong>{{ $errors->first('video') }}</strong>
+                                    </span>
+                                @endif
+                            </div>
+                        </div>
+
+
+
+                         <div class="form-group{{ $errors->has('slider_name') ? ' has-error' : '' }}">
+                            <label for="video" class="col-md-4 control-label">Slider Name
+                            </label>
+
+                            <div class="col-md-12">
+                                <input  type="text" class="form-control" name="slider_name"  value="{{ old('slider_name') }}" required> 
+
+                                @if ($errors->has('slider_name'))
+                                    <span class="help-block">
+                                        <strong>{{ $errors->first('slider_name') }}</strong>
                                     </span>
                                 @endif
                             </div>

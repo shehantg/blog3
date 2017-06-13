@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Tag;
+use App\Slider;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
@@ -24,8 +25,10 @@ class TagController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function create()
-    {
-        return view('tagcreate');
+    {   
+        $tags = Tag::all();
+
+        return view('tagcreate',['tags' => $tags]);
     }
 
     /**
@@ -36,6 +39,8 @@ class TagController extends Controller
      */
     public function store(Request $request)
     {
+
+        
          $validation = Validator::make($request->all(), [
         'name'  => 'required'
         
@@ -50,6 +55,10 @@ class TagController extends Controller
 
 
            $newTag->save();
+
+           $tags = Tag::all();
+        
+        return view('tagcreate',['tags' => $tags]);
     }
 
     /**
@@ -92,8 +101,15 @@ class TagController extends Controller
      * @param  \App\Tag  $tag
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Tag $tag)
+    public function destroy(Request $request,$id)
+
+
     {
-        //
+
+        $tag = Tag::find($id)->delete();
+        $tags = Tag::all();
+        
+        return view('tagcreate',['tags' => $tags]);
+
     }
 }

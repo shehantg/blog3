@@ -17,4 +17,6 @@ class Paragraphphoto extends Model
     	return $this->belongsTo('App\Paragraph','id');
     }
 
+    
+
 }

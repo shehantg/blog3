@@ -16,12 +16,13 @@ class CreateParagraphsTable extends Migration
         Schema::create('paragraphs', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('blog_id')->unsigned();
-            $table->foreign('blog_id')->references('id')->on('blogs');
-            $table->string('title');
+            $table->foreign('blog_id')->references('id')->on('blogs')->onDelete('cascade');
+           
             
             $table->text('body');
            
             $table->string('video')->nullable();
+           
             $table->timestamps();
         });
     }

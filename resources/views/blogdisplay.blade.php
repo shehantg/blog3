@@ -2,174 +2,124 @@
 
 @section('content')
 
-<div class="container">
- <div class="row">
- <div class="col-sm-12 col-md-12 jumbotron" id="blog-header">
+<div class="row About_us_page">
+  
+<div class="row">
+  <div class="col-md-12 jumbotron_padding">
 
-<p id="blogtitle" class="text-center">{!! $blog->title !!}</p>
-
-
-
-<p id="blogintroduction">{!! $blog->introduction !!}</p>
-
+<div class="jumbotron">
+   <div class="container">
+   <b>{!! $blog->title !!}</b>
+             <p><small><b>By <a href="">Michael Shehan</a></b>, Volunteer</small></p>
+             
+             <p><small><b>August 03, 2016</b></small></p>
+             <p>
+                <ul class="social">
+                <li><a href="#" class="rss" title="Rss"><i class="fa fa-rss fa2"></i></a></li>
+                <li><a href="#" class="face" title="Facebook"><i class="fa fa-facebook fa2"></i></a></li>
+                <li><a href="#" class="twit" title="Twitter"><i class="fa fa-twitter fa2"></i></a></li>
+                <li><a href="#" class="google" title="Google +"><i class="fa fa-google-plus fa2"></i></a></li>
+                <li><a href="#" class="linkedin" title="Linkedin"><i class="fa fa-linkedin fa2"></i></a></li>
+            </ul>
+             </p>
+             
+               
+            
+            
+                                                      
+     
+    </div>
 </div>
 </div>
+
 </div>
-<hr>
+<div class="row">
 
-<div class="container-fluid">
-    <div id="main_area">
-        <!-- Slider -->
-        <div class="row">
-            <div class="col-sm-4" id="slider-thumbs">
-                <!-- Bottom switcher of slider -->
-                <ul class="hide-bullets">
+<div  class="container"> 
+
+<div class="row lead container feature_pic"> 
+ 
+  <div class="col-md-8 col_padding_o">
+  @if (isset($image))
+      
+      <a href="#"  title="Rss"><img class="img-responsive col_padding_o" src="{{Storage::url($image->filename)}}"></a>
+@endif
+      <div class="lead">
+     
+    <p>     {!! $blog->body !!}</p>
+
+
+@if(isset($blog->slider_name))
+
+
+         <div class="row text_row4 bgcolor margin_top">
+<div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
+  <!-- Indicators -->
+ 
+
+  <!-- Wrapper for slides -->
+  <div class="carousel-inner" role="listbox">
                     
-                    
 
-						    
-						@foreach ($images as $image) 
-						 
-						
-
-						   <li>
-						   <div class="col-sm-3">
-                        <a class="thumbnail" id="carousel-selector-{{$loop->index}}"><img src="{{Storage::url($image->filename)}}"></a>
-                        </div>
-                    </li>
-
-                    
-                    	
-						@endforeach
-
-						
-
-
-
-                    
-                </ul>
-            </div>
-
-
-
-
-
-            <div class="col-sm-8">
-                <div class="col-xs-12" id="slider">
-                    <!-- Top part of the slider -->
-                    <div class="row">
-                        <div class="col-sm-12" id="carousel-bounding-box">
-                            <div class="carousel slide" id="myCarousel">
-
-
-
-                                <!-- Carousel items -->
-                                <div class="carousel-inner">
-
-                                		@if (count($images) === 0)
-
-				                    <p></p>
-										@elseif (count($images) === 1)
-
-
-										 <p></p>
-										@else
-
-										    
-										@foreach ($images as $image) 
+                
+            @foreach ($slider->slides as $slide) 
+             
+            
 
                                 @if ($loop->first)
-							        <div class="active item" data-slide-number="0">
-                                        <img src="{{Storage::url($image->filename)}}"></div>
+                      <div class="active item">
+                                        <a href="{{$slide->imglink}}" class="rss" title="Rss"><img class="img-responsive" src="{{Storage::url($slide->filename)}}"></a>
+                                        <div class="carousel-caption">
+                                        {{$slide->body}}
+       
+      </div></div>
 
                                    @else
 
-                                   <div class="item" data-slide-number="{{$loop->iteration}}">
-                                        <img src="{{Storage::url($image->filename)}}"></div>
-							    @endif
+                                   <div class="item">
+                                      <a href="{{$slide->imglink}}" class="rss" title="Rss">   <img class="img-responsive" src="{{Storage::url($slide->filename)}}"></a>
+                                        <div class="carousel-caption">
+                                        {{$slide->body}}
 
 
-							    
-										 
-                                    
+      </div></div></div>
+       @endif
+                                        @endforeach
 
-                                    
-	                                        
-										@endforeach
-
-										@endif
-
-                                    
-                                </div>
-                                <!-- Carousel nav -->
-                                <a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
-                                    <span class="glyphicon glyphicon-chevron-left"></span>
-                                </a>
-                                <a class="right carousel-control" href="#myCarousel" role="button" data-slide="next">
-                                    <span class="glyphicon glyphicon-chevron-right"></span>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-            </div>
-            <!--/Slider-->
-        </div>
-
-    </div>
-</div>
-
-<div class="container">
- <div class="row">
- <div class="col-sm-12 col-md-12 jumbotron" id="blog-body">
- <p class="text-center" id="overview">Overview</p>
- 
-<h4 class="text-center">{!! $blog->body !!}</h4>
-
-</div>
-</div>
+      <!-- Controls -->
+  <a class="left carousel-control" href="#carousel-example-generic" role="button" data-slide="prev">
+    <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+    <span class="sr-only">Previous</span>
+  </a>
+  <a class="right carousel-control" href="#carousel-example-generic" role="button" data-slide="next">
+    <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+    <span class="sr-only">Next</span>
+  </a>
+ </div>
 </div>
 
 
-
+                 
+@endif
 
 
 @if (isset($blog->video))
 
 
-<div class="container">
- <div class="row">
- <div class="col-sm-12 col-md-12">
-<h4>Video</h4>
-<hr>
+<div class="row text_row4 bgcolor margin_top">
+  <div class="col-md-12">
 
 
-<div class="videp-page col-md-6 ">
+
+
+
             <iframe width="560" height="315" src="{{$blog->video}}" frameborder="0" allowfullscreen></iframe>
-            </div>
+       
 
-</div>
 </div>
 </div>
 
 @endif
-
-
-<div class="container">
-<hr>
- <div class="row">
- <div class="col-sm-12 col-md-12 " id="blog-body">
-
-
-
-
-
-        
-</div>
-</div>
-</div>
-
 
 @if (Auth::id() == $blog->user_id)
 
@@ -179,20 +129,22 @@
 @endif
 
 
-    
-        
-                       
-                         
-                        
-                            <div class="container">
-                                 <div class="row">
+
+
+
+
+         </div>
+
+
+
+
                                  <p class="text-center" id="overview">Paragraphs</p>
                                  @foreach ($paragraphs as $paragraph) 
                                  <div class="col-sm-12 col-md-12 jumbotron" >
                                  
                                   
                                 <h4 class="text-center">{!! $paragraph->body !!}</h4>
-                                 <h4 class="text-center">{!! $paragraph->title !!}</h4>
+                                 
 
                                         @if (isset($paragraph->video))
 
@@ -203,32 +155,19 @@
 
                                     @endif
 
-
+                                      @if(count($paragraph->paragraphphotos)>=2)
                                          <div class="container">
-                                                <hr>
+                                                
                                                  <div class="row">
                                                  <div class="col-sm-12 col-md-12 ">
 
 
                                                         <div id="myCarousel-{{$loop->index}}" class="carousel slide" data-ride="carousel">
 
-                                     @if(isset($paragraph->paragraphphotos))
-
+                                    
                                     
   <!-- Indicators -->
-                                                   <ol class="carousel-indicators">
-   
-
-
-                                     @foreach($paragraph->paragraphphotos as $photo)
-                                        
-
-                                         <li data-target="#myCarouselp" data-slide-to="{{$loop->index}}" class="active"></li>
-
-
-    
-                                           </ol>
-                                           @endforeach
+                                                   
 
 
 
@@ -261,7 +200,7 @@
 @endif
    @endforeach
 
-   @endif
+   
   </div>
 
   <!-- Left and right controls -->
@@ -281,8 +220,12 @@
                                                 </div>
                                                 </div>
                                      
+                                          @else
+                                            @foreach($paragraph->paragraphphotos as $photo)
 
-                                            
+                                          <img src="{{Storage::url($photo->filename)}}" alt="Los Angeles">
+                                             @endforeach
+                                            @endif
 
 
                                        
@@ -298,7 +241,46 @@
                                     @endforeach
                                 </div>
                                 </div>
+                                
+        
 
+
+
+
+
+</div>
+         </div>
+         </div>
+         </div>
+
+
+
+        
+
+
+            
+                    	
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
+        
+                       
+                         
+                        
+                            
                     
                         
                        

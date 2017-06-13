@@ -14,19 +14,7 @@
                     <form novalidate="novalidate" class="form-horizontal" method="POST"  action="/Paragraphs/{{$blogId}}/create" enctype="multipart/form-data">
                         {{ csrf_field() }}
 
-                        <div class="form-group{{ $errors->has('title') ? ' has-error' : '' }}">
-                            <label for="name" class="col-md-4 control-label">Title</label>
-
-                            <div class="col-md-12">
-                                <input id="title" type="text" class="form-control" name="title" value="{{ old('title') }}" required autofocus>
-
-                                @if ($errors->has('title'))
-                                    <span class="help-block">
-                                        <strong>{{ $errors->first('title') }}</strong>
-                                    </span>
-                                @endif
-                            </div>
-                        </div>
+                       
 
                        
 

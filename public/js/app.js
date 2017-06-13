@@ -73,7 +73,7 @@
 "use strict";
 
 
-var bind = __webpack_require__(6);
+var bind = __webpack_require__(7);
 
 /*global toString:true*/
 
@@ -397,10 +397,10 @@ function getDefaultAdapter() {
   var adapter;
   if (typeof XMLHttpRequest !== 'undefined') {
     // For browsers use XHR adapter
-    adapter = __webpack_require__(2);
+    adapter = __webpack_require__(3);
   } else if (typeof process !== 'undefined') {
     // For node use HTTP adapter
-    adapter = __webpack_require__(2);
+    adapter = __webpack_require__(3);
   }
   return adapter;
 }
@@ -475,6 +475,33 @@ module.exports = defaults;
 
 /***/ }),
 /* 2 */
+/***/ (function(module, exports) {
+
+var g;
+
+// This works in non-strict mode
+g = (function() {
+	return this;
+})();
+
+try {
+	// This works if eval is allowed (see CSP)
+	g = g || Function("return this")() || (1,eval)("this");
+} catch(e) {
+	// This works if the window reference is available
+	if(typeof window === "object")
+		g = window;
+}
+
+// g can still be undefined, but nothing to do about it...
+// We return undefined, instead of nothing here, so it's
+// easier to handle this case. if(!global) { ...}
+
+module.exports = g;
+
+
+/***/ }),
+/* 3 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -485,7 +512,7 @@ var settle = __webpack_require__(17);
 var buildURL = __webpack_require__(20);
 var parseHeaders = __webpack_require__(26);
 var isURLSameOrigin = __webpack_require__(24);
-var createError = __webpack_require__(5);
+var createError = __webpack_require__(6);
 var btoa = (typeof window !== 'undefined' && window.btoa && window.btoa.bind(window)) || __webpack_require__(19);
 
 module.exports = function xhrAdapter(config) {
@@ -658,7 +685,7 @@ module.exports = function xhrAdapter(config) {
 
 
 /***/ }),
-/* 3 */
+/* 4 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -684,7 +711,7 @@ module.exports = Cancel;
 
 
 /***/ }),
-/* 4 */
+/* 5 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -696,7 +723,7 @@ module.exports = function isCancel(value) {
 
 
 /***/ }),
-/* 5 */
+/* 6 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -720,7 +747,7 @@ module.exports = function createError(message, config, code, response) {
 
 
 /***/ }),
-/* 6 */
+/* 7 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -735,33 +762,6 @@ module.exports = function bind(fn, thisArg) {
     return fn.apply(thisArg, args);
   };
 };
-
-
-/***/ }),
-/* 7 */
-/***/ (function(module, exports) {
-
-var g;
-
-// This works in non-strict mode
-g = (function() {
-	return this;
-})();
-
-try {
-	// This works if eval is allowed (see CSP)
-	g = g || Function("return this")() || (1,eval)("this");
-} catch(e) {
-	// This works if the window reference is available
-	if(typeof window === "object")
-		g = window;
-}
-
-// g can still be undefined, but nothing to do about it...
-// We return undefined, instead of nothing here, so it's
-// easier to handle this case. if(!global) { ...}
-
-module.exports = g;
 
 
 /***/ }),
@@ -790,6 +790,7 @@ Vue.component('example', __webpack_require__(34));
 var app = new Vue({
     el: '#app'
 });
+
 jQuery(document).ready(function ($) {
 
     $('#myCarousel').carousel({
@@ -834,7 +835,7 @@ module.exports = __webpack_require__(11);
 
 
 var utils = __webpack_require__(0);
-var bind = __webpack_require__(6);
+var bind = __webpack_require__(7);
 var Axios = __webpack_require__(13);
 var defaults = __webpack_require__(1);
 
@@ -869,9 +870,9 @@ axios.create = function create(instanceConfig) {
 };
 
 // Expose Cancel & CancelToken
-axios.Cancel = __webpack_require__(3);
+axios.Cancel = __webpack_require__(4);
 axios.CancelToken = __webpack_require__(12);
-axios.isCancel = __webpack_require__(4);
+axios.isCancel = __webpack_require__(5);
 
 // Expose all/spread
 axios.all = function all(promises) {
@@ -892,7 +893,7 @@ module.exports.default = axios;
 "use strict";
 
 
-var Cancel = __webpack_require__(3);
+var Cancel = __webpack_require__(4);
 
 /**
  * A `CancelToken` is an object that can be used to request cancellation of an operation.
@@ -1109,7 +1110,7 @@ module.exports = InterceptorManager;
 
 var utils = __webpack_require__(0);
 var transformData = __webpack_require__(18);
-var isCancel = __webpack_require__(4);
+var isCancel = __webpack_require__(5);
 var defaults = __webpack_require__(1);
 
 /**
@@ -1219,7 +1220,7 @@ module.exports = function enhanceError(error, config, code, response) {
 "use strict";
 
 
-var createError = __webpack_require__(5);
+var createError = __webpack_require__(6);
 
 /**
  * Resolve or reject a Promise based on response status.
@@ -1694,7 +1695,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* 29 */
 /***/ (function(module, exports, __webpack_require__) {
 
-
+/* WEBPACK VAR INJECTION */(function(global) {
 window._ = __webpack_require__(32);
 
 /**
@@ -1704,7 +1705,7 @@ window._ = __webpack_require__(32);
  */
 
 try {
-  window.$ = window.jQuery = __webpack_require__(31);
+  global.$ = global.jQuery = __webpack_require__(31);
 
   __webpack_require__(30);
 } catch (e) {}
@@ -1747,6 +1748,7 @@ if (token) {
 //     broadcaster: 'pusher',
 //     key: 'your-pusher-key'
 // });
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(2)))
 
 /***/ }),
 /* 30 */
@@ -31481,7 +31483,7 @@ return jQuery;
   }
 }.call(this));
 
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(7), __webpack_require__(38)(module)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(2), __webpack_require__(38)(module)))
 
 /***/ }),
 /* 33 */
@@ -41489,7 +41491,7 @@ Vue$3.compile = compileToFunctions;
 
 module.exports = Vue$3;
 
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(7)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(2)))
 
 /***/ }),
 /* 38 */

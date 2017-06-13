@@ -6,6 +6,7 @@ use App\Paragraph;
 use App\Paragraphphoto;
 use Illuminate\Http\Request;
 use App\Blog;
+use App\Slider;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
@@ -44,7 +45,7 @@ class ParagraphController extends Controller
        
 
         $validation = Validator::make($request->all(), [
-        'title'  => 'required',
+        
         
         
         
@@ -68,7 +69,7 @@ class ParagraphController extends Controller
 
        'blog_id' => $id,
 
-        'title' => $request->title,
+        
          'body' => $request->body,
          
         'video' => $request->video
@@ -99,6 +100,23 @@ class ParagraphController extends Controller
         }
 
     }
+
+
+    $paragraphs  = Blog::find($id)->paragraphs;
+
+                     
+
+
+      $blog = Blog::find($id);
+      $images = $blog->photos;
+
+      $slider = Slider::where('body',$blog->slider_name)->first();
+
+      // $images = DB::table('photos')->where('blog_id',$blog->id)->pluck('filename');  
+          
+       
+        
+        return view('blogdisplay',['blog' => $blog,'images' =>  $images,'paragraphs'=> $paragraphs,'slider' => $slider]);
 
     }
 

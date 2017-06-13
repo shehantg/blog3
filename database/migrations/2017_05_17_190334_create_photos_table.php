@@ -16,7 +16,7 @@ class CreatePhotosTable extends Migration
         Schema::create('photos', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('blog_id')->unsigned();
-            $table->foreign('blog_id')->references('id')->on('blogs');
+            $table->foreign('blog_id')->references('id')->on('blogs')->onDelete('cascade');;
             $table->string('filename');
             $table->timestamps();
         });

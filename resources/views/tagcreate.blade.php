@@ -10,7 +10,7 @@
                <h1>Create New Adventure</h1>
 
                 <div>
-                    <form novalidate="novalidate" class="form-horizontal" method="POST"  action="/tags" >
+                    <form novalidate="novalidate" class="form-horizontal" method="POST"  action="/tags/create" >
                         {{ csrf_field() }}
 
                         <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
@@ -41,5 +41,64 @@
             </div>
         </div>
     </div>
+
+    <div class="container">
+        <div class="row">
+             <div class="col-md-12">
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+       
+                         <th>Name</th>
+        
+                     
+
+                        
+                         <th>Delete</th>
+
+                        
+      </tr>
+    </thead>
+    <tbody>
+
+
+
+
+
+
+@foreach($tags as $tag)
+<tr>
+
+
+        <td> {{$tag->name}}</td>
+       
+       
+        
+        
+      
+
+       <td>
+<form novalidate="novalidate" class="form-horizontal" method="POST"  action="/tags/{{$tag->id}}/delete" >
+                        {{ csrf_field() }}
+       <button>Delete</button>
+
+       </form>
+       </td>
+
+       
+      
+   </tr>
+@endforeach
+
+ </tbody>
+  </table>
+
+
+
+
+ </div>
+
 </div>
+</div>
+
 @endsection

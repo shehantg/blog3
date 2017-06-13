@@ -8,13 +8,16 @@ use App\User;
 use App\Tag;
 use App\Paragraph;
 
-use App\photo;
+use App\Photo;
+use Carbon\Carbon;
 
 use Illuminate\Database\Eloquent\Model;
 
 class Blog extends Model
 {
-    
+    protected $table = 'blogs';
+
+    protected $fillable = ['user_id','title','body','image','video','slider_name','status','featured','subfeatured'];
 
 
     public function getStoryTitleAttribute($value)
@@ -22,14 +25,11 @@ class Blog extends Model
         return strtoupper($value);
     }
 
-    public function comments()
-    {
-        return $this->hasMany('App\Comment','id');
-    }
+    
 
     public function user()
     {
-        return $this->belongsTo('App\User','id');
+        return $this->belongsTo('App\User');
     }
 
     public function tags()
@@ -42,10 +42,12 @@ class Blog extends Model
         return $this->hasMany('App\Paragraph','blog_id');
     }
 
-    public function photos()
+    public function photo()
     {
-        return $this->hasMany('App\Photo','blog_id');
+        return $this->hasOne('App\Photo','blog_id');
     }
 
+
+    
 
 }

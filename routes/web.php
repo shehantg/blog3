@@ -17,19 +17,482 @@ Route::get('/', function () {
 
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/home', 'HomeController@index');
 
 //BLOGSCONTROLLER
 
-Route::resource('blogs', 'BlogsController');
+Route::get('blogs', [
+
+
+	'uses' => 'BlogsController@index',
+
+    'middleware' => 'roles',
+	'roles'  => ['Admin']
+
+	]);
+
+Route::get('blogs/search','BlogsController@search'); 
+
+
+Route::get('blogs/create', [ 
+
+
+	'uses' => 'BlogsController@create',
+
+    'middleware' => 'roles',
+	'roles'  => ['Admin','Blogger']
+
+	]);
+
+
+Route::post('blogs/create', [
+
+
+	'uses' => 'BlogsController@store',
+
+    'middleware' => 'roles',
+	'roles'  => ['Admin','Blogger']
+
+	]);
+
+Route::get('blogs/{id}', [
+
+
+	'uses' => 'BlogsController@show',
+
+    'middleware' => 'roles',
+	'roles'  => ['Admin']
+
+	]);
+
+Route::post('blogs/{id}/publish', [
+
+
+	'uses' => 'BlogsController@update',
+
+    'middleware' => 'roles',
+	'roles'  => ['Admin']
+
+	]);
+
+Route::post('blogs/{id}/delete', [
+
+
+	'uses' => 'BlogsController@destroy',
+
+    'middleware' => 'roles',
+	'roles'  => ['Admin']
+
+	]);
+Route::post('blogs/{id}/featured', [
+
+
+	'uses' => 'BlogsController@featureblog',
+
+    'middleware' => 'roles',
+	'roles'  => ['Admin']
+
+	]);
+
+Route::post('blogs/{id}/subfeatured', [
+
+
+	'uses' => 'BlogsController@subfeatureblog',
+
+    'middleware' => 'roles',
+	'roles'  => ['Admin']
+
+	]);
+
 
 
 
 
 //TAGCONTROLLER
 
-Route::resource('tags', 'TagController');
+Route::get('tags/create', [
 
-Route::get('Paragraphs/{id}/create','ParagraphController@create');
-Route::post('Paragraphs/{id}/create','ParagraphController@store');
 
+	'uses' => 'TagController@create',
+
+    'middleware' => 'roles',
+	'roles'  => ['Admin','Blogger']
+
+	]);
+
+
+Route::post('tags/create', [
+
+
+	'uses' => 'TagController@store',
+
+    'middleware' => 'roles',
+	'roles'  => ['Admin','Blogger']
+
+	]);
+
+Route::post('tags/{id}/delete', [
+
+
+	'uses' => 'TagController@destroy',
+
+    'middleware' => 'roles',
+	'roles'  => ['Admin','Blogger']
+
+	]);
+
+	
+
+
+
+
+
+
+
+Route::get('Paragraphs/{id}/create', [
+
+	'uses' => 'ParagraphController@create',
+	'middleware' => 'roles',
+	'roles'  => ['Admin','Blogger']
+
+	]);
+
+
+Route::post('Paragraphs/{id}/create',[
+
+	'uses' => 'ParagraphController@store',
+	'middleware' => 'roles',
+	'roles'  => ['Admin','Blogger']
+
+	]);
+
+
+
+//USERSCONTROLLER
+Route::get('/users', [
+	'uses' => 'UsersController@index',
+	'middleware' => 'roles',
+	'roles'  => ['Admin']
+
+	]);
+
+
+Route::get('/user/{user}',[
+	'uses' => 'UsersController@show',
+	'middleware' => 'roles',
+	'roles'  => ['Admin']
+
+	]);
+Route::POST('/user/{user}/role',[
+	'uses' => 'UsersController@assign',
+	'middleware' => 'roles',
+	'roles'  => ['Admin']
+
+	]);
+
+//SLIDERCONTROLLER
+
+
+Route::get('/slider/create',[
+	'uses' => 'SliderController@create',
+	'middleware' => 'roles',
+	'roles'  => ['Admin']
+
+	]);
+Route::POST('/slider/create',[
+	'uses' => 'SliderController@store',
+	'middleware' => 'roles',
+	'roles'  => ['Admin']
+
+	]);
+
+Route::POST('/slider/{id}/edit',[
+	'uses' => 'SliderController@edit',
+	'middleware' => 'roles',
+	'roles'  => ['Admin']
+
+	]);
+
+Route::POST('/slider/{id}/delete',[
+	'uses' => 'SliderController@destroy',
+	'middleware' => 'roles',
+	'roles'  => ['Admin']
+
+	]);
+
+Route::POST('/slider/{id}/publish',[
+	'uses' => 'SliderController@update',
+	'middleware' => 'roles',
+	'roles'  => ['Admin']
+
+	]);
+
+
+//SLIDECONTROLLER
+
+
+Route::get('/slide/create',[
+	'uses' => 'SlideController@create',
+	'middleware' => 'roles',
+	'roles'  => ['Admin']
+
+	]);
+Route::POST('/slide/create',[
+	'uses' => 'SlideController@store',
+	'middleware' => 'roles',
+	'roles'  => ['Admin']
+
+	
+]);
+
+
+	//SLIDECONTROLLER
+
+
+
+
+
+Route::get('/slider/{id}/slides/create',[
+	'uses' => 'SlideController@create',
+	'middleware' => 'roles',
+	'roles'  => ['Admin']
+
+	]);
+
+
+Route::POST('/slider/{id}/slides/create',[
+	'uses' => 'SlideController@store',
+	'middleware' => 'roles',
+	'roles'  => ['Admin']
+
+	]);
+
+
+Route::POST('/slide/{id}/edit',[
+	'uses' => 'SlideController@edit',
+	'middleware' => 'roles',
+	'roles'  => ['Admin']
+
+	]);
+
+Route::POST('/slide/{id}/delete',[
+	'uses' => 'SlideController@destroy',
+	'middleware' => 'roles',
+	'roles'  => ['Admin']
+
+	]);
+
+
+//EventController
+Route::get('/events/index',[
+
+	'uses'  => 'EventController@index',
+	'middleware' => 'roles',
+	'roles'  => ['Admin']
+	]);
+
+
+Route::POST('/events/{id}/publish',[
+
+	'uses' => 'EventController@publish',
+	'middleware' => 'roles',
+	'roles'  => ['Admin']
+
+	]);
+
+
+Route::POST('/events/{id}/delete',[
+
+	'uses' => 'EventController@delete',
+	'middleware' => 'roles',
+	'roles'  => ['Admin']
+
+	]);
+
+Route::get('/events/create',[
+	'uses' => 'EventController@create',
+	'middleware' => 'roles',
+	'roles'  => ['Admin']
+
+	]);
+
+
+Route::POST('/events/create',[
+	'uses' => 'EventController@store',
+	'middleware' => 'roles',
+	'roles'  => ['Admin']
+
+	]);
+
+
+//CampaignController
+
+
+
+
+Route::get('/campaigns',[
+	'uses' => 'CampaignController@index',
+	'middleware' => 'roles',
+	'roles'  => ['Admin']
+
+	]);
+
+
+Route::get('/campaigns/create',[
+	'uses' => 'CampaignController@create',
+	'middleware' => 'roles',
+	'roles'  => ['Admin']
+
+	]);
+
+Route::get('/campaigns/{id}/display',[
+	'uses' => 'CampaignController@show',
+	'middleware' => 'roles',
+	'roles'  => ['Admin']
+
+	]);
+
+
+Route::POST('/campaigns/create',[
+	'uses' => 'CampaignController@store',
+	'middleware' => 'roles',
+	'roles'  => ['Admin']
+
+	]);
+
+Route::POST('/campaigns/{id}/publish',[
+	'uses' => 'CampaignController@publish',
+	'middleware' => 'roles',
+	'roles'  => ['Admin']
+
+	]);
+
+Route::POST('/campaigns/{id}/delete',[
+	'uses' => 'CampaignController@delete',
+	'middleware' => 'roles',
+	'roles'  => ['Admin']
+
+	]);
+
+
+//TeamController
+
+Route::get('/team/create',[
+	'uses' => 'TeamController@create',
+	'middleware' => 'roles',
+	'roles'  => ['Admin']
+
+	]);
+
+	Route::get('/team/index',[
+	'uses' => 'TeamController@index',
+	'middleware' => 'roles',
+	'roles'  => ['Admin']
+
+	]);
+
+Route::get('/team/{id}',[
+	'uses' => 'TeamController@display',
+	'middleware' => 'roles',
+	'roles'  => ['Admin']
+
+
+	]);
+
+
+
+Route::get('/team/index',[
+	'uses' => 'TeamController@index',
+	'middleware' => 'roles',
+	'roles'  => ['Admin']
+
+	]);
+
+Route::POST('/team/{id}/publish',[
+	'uses' => 'TeamController@publish',
+	'middleware' => 'roles',
+	'roles'  => ['Admin']
+
+	]);
+
+Route::get('/team/{id}/edit',[
+	'uses' => 'TeamController@update',
+	'middleware' => 'roles',
+	'roles'  => ['Admin']
+
+	]);
+
+
+Route::POST('/team/{id}/edit',[
+	'uses' => 'TeamController@edit',
+	'middleware' => 'roles',
+	'roles'  => ['Admin']
+
+	]);
+
+Route::POST('/team/{id}/delete',[
+	'uses' => 'TeamController@delete',
+	'middleware' => 'roles',
+	'roles'  => ['Admin']
+
+	]);
+
+
+Route::POST('/team/create',[
+	'uses' => 'TeamController@store',
+	'middleware' => 'roles',
+	'roles'  => ['Admin']
+
+	]);
+
+
+//sectionController
+
+Route::get('/section/create',[
+	'uses' => 'SectionController@create',
+	'middleware' => 'roles',
+	'roles'  => ['Admin']
+
+
+	]);
+
+Route::get('/section/index',[
+	'uses' => 'SectionController@index',
+	'middleware' => 'roles',
+	'roles'  => ['Admin']
+
+
+	]);
+
+Route::POST('/section/create',[
+	'uses' => 'SectionController@store',
+	'middleware' => 'roles',
+	'roles'  => ['Admin']
+
+
+	]);
+
+Route::POST('/section/{id}/delete',[
+	'uses' => 'SectionController@delete',
+	'middleware' => 'roles',
+	'roles'  => ['Admin']
+
+
+	]);
+
+
+Route::get('/section/{id}/edit',[
+	'uses' => 'SectionController@showedit',
+	'middleware' => 'roles',
+	'roles'  => ['Admin']
+
+
+	]);
+
+Route::POST('/section/{id}/edit',[
+	'uses' => 'SectionController@edit',
+	'middleware' => 'roles',
+	'roles'  => ['Admin']
+
+
+	]);
