@@ -53,7 +53,7 @@
 
 
          <div class="row text_row4 bgcolor margin_top">
-<div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
+<div id="carousel-example-generic" class="carousel slide" data-ride="carousel"> 
   <!-- Indicators -->
  
 
@@ -82,10 +82,10 @@
                                         {{$slide->body}}
 
 
-      </div></div></div>
+      </div></div>
        @endif
                                         @endforeach
-
+</div>
       <!-- Controls -->
   <a class="left carousel-control" href="#carousel-example-generic" role="button" data-slide="prev">
     <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>

@@ -98,6 +98,48 @@
                  
 @endif
 
+ @if(Auth::id() == $campaign->user->id)
+
+ <a href="/campaign/{{$campaign->id}}/cpcreatedonation">Add a donation option </a>
+
+ @endif
+
+ 
+
+
+
+
+
+ <table class="table table-striped">
+    <thead>
+      <tr>
+      
+        <th>Title</th>
+       
+      
+       <th>Program Scheme</th>
+        
+        <th>Amount</th>
+        <th>Donate</th>
+      </tr>
+    </thead>
+    <tbody>
+    @foreach($donations as $donation)
+<tr>
+
+<td>{{$donation->title}}</td>
+
+<td>{{$donation->program_scheme}}</td>
+<td>{{$donation->amount}}</td>
+<td><button class="btn btn-primary">DONATE</button></td>
+
+
+
+</tr>
+ @endforeach
+</tbody>
+</table>
+</div>
 
 
 

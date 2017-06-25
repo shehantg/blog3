@@ -19,9 +19,10 @@ class CreateCampaignsTable extends Migration
             $table->text('body');
             $table->integer('user_id')->unsigned();
             $table->foreign('user_id')->references('id')->on('users');
-            $table->string('date');
-            $table->string('venue');
-           
+            $table->string('date')->nullable();;
+            $table->string('venue')->nullable();;
+            $table->string('photo');
+           $table->string('type');
             $table->string('slider')->nullable();
             $table->string('video')->nullable();
             $table->boolean('status');

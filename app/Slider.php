@@ -5,6 +5,7 @@ namespace App;
 use Illuminate\Database\Eloquent\Model;
 use App\Slider;
 use App\User;
+use App\Event;
 
 class Slider extends Model
 {
@@ -25,4 +26,11 @@ class Slider extends Model
     {
         return $this->belongsTo('App\User');
     }
+
+    public function events()
+    {
+        return $this->hasMany('App\Event','slider');
+    }
+
+
 }

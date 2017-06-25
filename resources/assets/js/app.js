@@ -7,7 +7,7 @@
 
 require('./bootstrap');
 
-window.Vue = require('vue');
+
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to
@@ -15,13 +15,6 @@ window.Vue = require('vue');
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
 
-Vue.component('example', require('./components/Example.vue'));
-
-
-
-const app = new Vue({
-    el: '#app'
-});
 
 
 jQuery(document).ready(function($) {
@@ -46,6 +39,33 @@ jQuery(document).ready(function($) {
                  var id = $('.item.active').data('slide-number');
                 $('#carousel-text').html($('#slide-content-'+id).html());
         });
+
+
+
+ //mouseochildren
+
+
+
+        $(".slide").mouseover(function (){
+
+$(this).children(".campaignurgentp").show();
+$(this).find('.imgg').fadeTo( "slow", 0.33 );
+    });
+
+
+
+
+//mouseout
+$(".slide").mouseout(function (){
+
+    $(this).children(".campaignurgentp").hide();
+    $(this).find('.imgg').fadeTo( "slow", 1 );
+    });
+
+
+
+
 });
+
 
 

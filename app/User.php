@@ -7,6 +7,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 
 use App\Role;
 use App\Slider;
+use App\Homeslider;
 use App\Blog;
 use App\Event;
 use App\Campaign;
@@ -82,6 +83,11 @@ class User extends Authenticatable
     public function sliders()
     {
         return $this->hasMany('App\Slider','user_id');
+    }
+
+    public function homesliders()
+    {
+        return $this->hasMany('App\Homeslider','user_id');
     }
 
     public function blogs()

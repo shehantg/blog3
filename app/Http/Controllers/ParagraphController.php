@@ -42,7 +42,11 @@ class ParagraphController extends Controller
      */
     public function store(Request $request, $id)
     {
-       
+        
+
+
+
+
 
         $validation = Validator::make($request->all(), [
         
@@ -50,10 +54,13 @@ class ParagraphController extends Controller
         
         
         'body'  => 'required',
-        'video' => 'required'
+        'video' => 'required',
+        'photos' => 'required'
 
         
       ]);
+
+
 
       
 
@@ -61,6 +68,19 @@ class ParagraphController extends Controller
         foreach(range(0, $photos) as $index) {
             $rules['photos.' . $index] = 'image|mimes:jpeg,bmp,png';
         }
+
+
+        if( $validation->fails() ){
+        session()->flash('message','Please Fill Required Fields !!!');
+
+            return redirect()->back()->withInput()
+                             ->with('errors', $validation->errors() );
+
+                             return session('message'); 
+      }
+
+
+
 
 
          $newParagraph =  Paragraph::create([

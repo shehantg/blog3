@@ -23,7 +23,7 @@ class CreateBlogsTable extends Migration
             $table->text('body')->nullable();
            
             $table->string('video')->nullable();
-            $table->string('slider_name');
+            $table->string('slider_name')->nullable();
             $table->boolean('status');
             $table->boolean('featured');
             $table->boolean('subfeatured');

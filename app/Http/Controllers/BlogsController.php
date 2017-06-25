@@ -137,7 +137,12 @@ class BlogsController extends Controller
     {
         
 
-        
+        $this->validate($request, [
+            'title' => 'bail|required|max:255',
+            'body' => 'required',
+            'tags'  => 'required',
+            'photo' =>'required'
+        ]);
 
          $newStory = new Blog;
 

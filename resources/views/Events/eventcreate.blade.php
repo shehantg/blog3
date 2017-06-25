@@ -49,6 +49,20 @@
                                 
                             </div>
 
+                                 <div class="form-group{{ $errors->has('photo') ? ' has-error' : '' }}">
+                            <label for="photos" class="col-md-4 control-label">Image
+                            </label>
+
+                            <div class="col-md-12">
+                                <input id="photos" type="file" class="form-control" name="photo"  value="{{ old('photo') }}" required> 
+
+                                @if ($errors->has('photo'))
+                                    <span class="help-block">
+                                        <strong>{{ $errors->first('photo') }}</strong>
+                                    </span>
+                                @endif
+                            </div>
+                        </div>
 
 
 
@@ -160,7 +174,9 @@
 <script src="{{ URL::to('/src/vendor/tinymce/js/tinymce/tinymce.min.js')}}"></script>
  <script type="text/javascript">
             $(function () {
-                $('#datetimepicker1').datetimepicker();
+                $('#datetimepicker1').datetimepicker({
+        format: "DD MM YYYY"         
+    });
             });
         </script>
 <script>

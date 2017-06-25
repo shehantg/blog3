@@ -26,12 +26,12 @@
  
         
  <nav class="navbar navbar-default">
-  <div class="container-fluid">
+  <div class="container">
     <!-- Brand and toggle get grouped for better mobile display -->
     <div class="navbar-header">
       <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
-        <span class="sr-only">Toggle navigation</span>
-        <span class="icon-bar"></span>
+        <span class="sr-only">Toggle navigation</span> 
+        <span class="icon-bar"></span> 
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
@@ -41,7 +41,13 @@
     <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav">
-        <li><a href="index.html">Home<span class="sr-only">(current)</span></a></li>
+        
+
+
+      </ul>
+      
+      <ul class="nav navbar-nav navbar-right">
+      <li><a href="index.html">Home<span class="sr-only">(current)</span></a></li>
         
         <li class="dropdown dropdown-large active">
           <a href="aboutus.html" class="dropdown-toggle" data-toggle="dropdown">Blog</a>
@@ -158,11 +164,6 @@
           </li>
                 </ul>
         </li>
-
-
-      </ul>
-      
-      <ul class="nav navbar-nav navbar-right">
         <li><a href="shop.html"><span class="glyphicon glyphicon glyphicon-shopping-cart icon_margin" aria-hidden="true"></span>Shop</a></li>
         <li class="dropdown">
           <a href="Contacts.html" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Contact Us <span class="caret"></span></a>
@@ -178,12 +179,19 @@
             <div class="form-group">
               <input type="text" class="form-control" placeholder="Search">
             </div>
-                <button type="submit" class="btn btn-default">Submit</button>
+                <button type="submit" class="btn btn-default glyphicon glyphicon-search"></button>
         </form>
     </div><!-- /.navbar-collapse -->
   </div><!-- /.container-fluid -->
 
 </nav>
+
+@if($flash = session('message'))
+<div id="message" class="alert alert-success animated  slideOutUp" role="alert">
+{{$flash}}
+</div>
+
+@endif
 
         @yield('content')
 
@@ -273,11 +281,15 @@
     <!-- Scripts -->
 
    
-      <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+      <script
+  src="https://code.jquery.com/jquery-2.2.4.min.js"
+  integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44="
+  crossorigin="anonymous"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.12.0/moment-with-locales.min.js"></script>
     <script src="https://cdn.jsdelivr.net/bootstrap.datetimepicker/4.17.37/js/bootstrap-datetimepicker.min.js"></script>
      <script src="{{ asset('js/app.js') }}"></script>
+     <script src="{{ asset('js/slick.min.js') }}"></script>
     @yield('scripts')
 
 </body>

@@ -11,13 +11,12 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/',  'HomePageController@show');
+Route::get('/home',  'HomeController@index');
 
 Auth::routes();
 
-Route::get('/home', 'HomeController@index');
+
 
 //BLOGSCONTROLLER
 
@@ -284,6 +283,8 @@ Route::POST('/slide/{id}/delete',[
 
 
 //EventController
+
+
 Route::get('/events/index',[
 
 	'uses'  => 'EventController@index',
@@ -316,6 +317,9 @@ Route::get('/events/create',[
 
 	]);
 
+Route::get('/events/{id}','EventController@display');
+	
+
 
 Route::POST('/events/create',[
 	'uses' => 'EventController@store',
@@ -328,7 +332,25 @@ Route::POST('/events/create',[
 //CampaignController
 
 
+//show create a donation for campaign page 
 
+Route::get('/campaign/{id}/cpcreatedonation',[
+	'uses' => 'CampaignController@donation',
+	'middleware' => 'roles',
+	'roles'  => ['Admin']
+
+	]);
+
+//save donation for campaign
+Route::POST('/campaign/{id}/cpcreatedonation',[
+	'uses' => 'CampaignController@savedonation',
+	'middleware' => 'roles',
+	'roles'  => ['Admin']
+
+	]);
+
+
+//show all campaigns
 
 Route::get('/campaigns',[
 	'uses' => 'CampaignController@index',
@@ -491,6 +513,187 @@ Route::get('/section/{id}/edit',[
 
 Route::POST('/section/{id}/edit',[
 	'uses' => 'SectionController@edit',
+	'middleware' => 'roles',
+	'roles'  => ['Admin']
+
+
+	]);
+
+
+//HOMESLIDERCONTROLLER
+
+Route::get('/homeslider/create',[
+	'uses' => 'HomeSliderController@create',
+	'middleware' => 'roles',
+	'roles'  => ['Admin']
+
+
+	]);
+
+Route::POST('/homeslider/create',[
+	'uses' => 'HomeSliderController@store',
+	'middleware' => 'roles',
+	'roles'  => ['Admin']
+
+
+	]);
+
+Route::POST('/homeslider/{id}/publish',[
+	'uses' => 'HomeSliderController@update',
+	'middleware' => 'roles',
+	'roles'  => ['Admin']
+
+
+	]);
+
+Route::POST('/homeslider/{id}/delete',[
+	'uses' => 'HomeSliderController@delete',
+	'middleware' => 'roles',
+	'roles'  => ['Admin']
+
+
+	]);
+
+
+
+//HOMESLIDECONTROLLER
+
+
+Route::get('/homeslide/{id}/create',[
+	'uses' => 'HomeSlideController@create',
+	'middleware' => 'roles',
+	'roles'  => ['Admin']
+
+
+	]);
+
+Route::POST('/homeslide/{id}/create',[
+	'uses' => 'HomeSlideController@store',
+	'middleware' => 'roles',
+	'roles'  => ['Admin']
+
+
+	]);
+
+Route::POST('/homeslider/{id}/{Id}/edit',[
+	'uses' => 'HomeSlideController@edit',
+	'middleware' => 'roles',
+	'roles'  => ['Admin']
+
+
+	]);
+
+Route::get('/homeslider/{id}/{Id}/edit',[
+	'uses' => 'HomeSlideController@displayedit',
+	'middleware' => 'roles',
+	'roles'  => ['Admin']
+
+
+	]);
+
+Route::POST('/homeslider/{id}/{Id}/delete',[
+	'uses' => 'HomeSlideController@delete',
+	'middleware' => 'roles',
+	'roles'  => ['Admin']
+
+
+	]);
+
+
+
+Route::get('/homeslider/{id}/show',[
+	'uses' => 'HomeSliderController@show',
+	'middleware' => 'roles',
+	'roles'  => ['Admin']
+
+
+	]);
+
+Route::get('/homeslide/{id}/show', 'HomeSlideController@showslide');
+	
+
+
+	
+
+//DONATIONSCONTROLLER
+
+Route::get('/homeslide/{id}/hscreatedonation',[
+	'uses' => 'DonationController@create',
+	'middleware' => 'roles',
+	'roles'  => ['Admin']
+
+
+	]);
+
+Route::POST('/homeslide/{id}/hscreatedonation',[
+	'uses' => 'DonationController@store',
+	'middleware' => 'roles',
+	'roles'  => ['Admin']
+
+
+	]);
+
+
+//TESTIMONIALCONTROLLER
+
+Route::get('/testimonial-dg/create',[
+	'uses' => 'TestimonialController@create',
+	'middleware' => 'roles',
+	'roles'  => ['Admin']
+
+
+	]);
+// show all testimonials
+Route::get('/testimonial-dg/index',[
+	'uses' => 'TestimonialController@index',
+	'middleware' => 'roles',
+	'roles'  => ['Admin']
+
+
+	]);
+
+Route::POST('/testimonial-dg/create',[
+	'uses' => 'TestimonialController@store',
+	'middleware' => 'roles',
+	'roles'  => ['Admin']
+
+
+	]);
+
+
+//CREATE SPONSORS
+
+Route::get('/sponsor/create',[
+	'uses' => 'SponsorController@create',
+	'middleware' => 'roles',
+	'roles'  => ['Admin']
+
+
+	]);
+
+Route::POST('/sponsor/create',[
+	'uses' => 'SponsorController@store',
+	'middleware' => 'roles',
+	'roles'  => ['Admin']
+
+
+	]);
+
+
+//Volunteer Controller
+
+// Register a volunteer
+
+Route::get('/volunteer/register',[
+	'uses' => 'VolunteerController@create',
+	'middleware' => 'roles',
+	'roles'  => ['Admin']
+
+
+	]);
+
+Route::POST('/volunteer/register',[
+	'uses' => 'VolunteerController@register',
 	'middleware' => 'roles',
 	'roles'  => ['Admin']
 

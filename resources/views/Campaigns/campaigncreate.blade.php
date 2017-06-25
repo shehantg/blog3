@@ -35,7 +35,7 @@
 
                             <div class="col-md-12">
                                 <div class='input-group date'>
-                    <input type='text' class="form-control"  name="date" id="datetimepicker1"/>
+                    <input type='text' class="form-control"  name="date" id="datetimepicker1"/ required>
                     <span class="input-group-addon">
                         <span class="glyphicon glyphicon-calendar"></span>
                     </span>
@@ -58,6 +58,46 @@
        
                         </div>
 
+                        <div class="form-group{{ $errors->has('photo') ? ' has-error' : '' }}">
+                            <label for="photos" class="col-md-4 control-label">Image
+                            </label>
+
+                            <div class="col-md-12">
+                                <input id="photos" type="file" class="form-control" name="photo"  value="{{ old('photo') }}" required> 
+
+                                @if ($errors->has('photo'))
+                                    <span class="help-block">
+                                        <strong>{{ $errors->first('photo') }}</strong>
+                                    </span>
+                                @endif
+                            </div>
+                        </div>
+
+
+
+                             <div class="form-group{{ $errors->has('type') ? ' has-error' : '' }}">
+                            <label for="type" class="col-md-4 control-label">Program Scheme</label>
+
+                            <div class="col-md-12">
+                            <select class="form-control" id="type" name="type"  value="{{ old('program_scheme') }}" required>
+                            
+
+
+                           
+    <option value="">-- select type of campaign --</option>
+    <option value="urgent_causes">Website front page urgent causes</option>
+    <option value="front_page">Front page wishlist</option>
+      <option value="featured">featured</option>
+      <option value="other">other</option>
+   
+
+                            
+                           
+                          </select>
+
+                               
+                            </div>
+                        </div>
                      
 
 

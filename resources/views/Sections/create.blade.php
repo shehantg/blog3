@@ -9,7 +9,7 @@
                <h1>Create New Section</h1>
 
                 <div>
-                    <form novalidate="novalidate" class="form-horizontal" method="POST"  action="/section/create">
+                    <form novalidate="novalidate" class="form-horizontal" method="POST"  action="/homeslider/create">
                         {{ csrf_field() }}
 
                         <div class="form-group{{ $errors->has('title') ? ' has-error' : '' }}">

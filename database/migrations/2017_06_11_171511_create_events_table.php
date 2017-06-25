@@ -21,6 +21,7 @@ class CreateEventsTable extends Migration
             $table->foreign('user_id')->references('id')->on('users');
             $table->string('date');
             $table->string('venue');
+            $table->string('photo');
            
             $table->string('slider')->nullable();
              $table->boolean('status');
