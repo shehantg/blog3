@@ -1,9 +1,23 @@
-@extends('layouts.app')
+@extends('layouts.dashboard')
 
 @section('content')
+  <div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+      <h1>
+        Page Header
+        <small>Optional description</small>
+      </h1>
+      <ol class="breadcrumb">
+        <li><a href="#"><i class="fa fa-dashboard"></i> Level</a></li>
+        <li class="active">Here</li>
+      </ol>
+    </section>
 
-<div class="container">
- <div class="row top-space">
+    <!-- Main content -->
+    <section class="content">
+
+      <div class="row top-space">
 
  <div class="col-md-12">
 @foreach($homeslides as $homeslide)
@@ -49,8 +63,15 @@
 
 <img  class="img-responsive" src="{{Storage::url($homeslide->filename)}}">
 <div class="row">
-<a href=" {{ url('homeslider/'.$homeslider->id.'/'.$homeslide->id.'/edit') }} "><button type="button" class="btn btn-primary">Edit</button></a>
-<a href=" {{ url('/homeslider/'.$homeslider->id.'/'.$homeslide->id.'/delete') }} "><button type="button" class="btn btn-danger">Delete</button></a>
+<div class="col-md-6 col-md-offset-3">
+<a href=" {{ url('homeslider/'.$homeslider->id.'/'.$homeslide->id.'/edit') }} "><button type="button" class="btn btn-block btn-info btn-flat">Edit</button></a>
+
+<form novalidate="novalidate" class="form-horizontal" method="POST"  action="/homeslider/{{$homeslider->id}}/{{$homeslide->id}}/delete" >
+                        {{ csrf_field() }}
+       <button type="submit" class="btn btn-block btn-danger btn-flat">Delete</button>
+
+       </form>
+</div>
 </div>
 <hr>
 
@@ -58,5 +79,14 @@
 
  </div>
  </div>
- </div>
+
+
+        
+
+    </section>
+    <!-- /.content -->
+  </div>
+
+
+
  @endsection

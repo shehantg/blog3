@@ -8,4 +8,4 @@ class Volunteer extends Model
 {
     
 }
-}
+

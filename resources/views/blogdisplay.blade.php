@@ -1,38 +1,26 @@
-@extends('layouts.app')
+@extends('layouts.dashboard')
 
 @section('content')
 
-<div class="row About_us_page">
-  
-<div class="row">
-  <div class="col-md-12 jumbotron_padding">
+  <!-- Content Wrapper. Contains page content -->
+  <div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+      <h1>
+        Page Header
+        <small>Optional description</small>
+      </h1>
+      <ol class="breadcrumb">
+        <li><a href="#"><i class="fa fa-dashboard"></i> Level</a></li>
+        <li class="active">Here</li>
+      </ol>
+    </section>
 
-<div class="jumbotron">
-   <div class="container">
-   <b>{!! $blog->title !!}</b>
-             <p><small><b>By <a href="">Michael Shehan</a></b>, Volunteer</small></p>
-             
-             <p><small><b>August 03, 2016</b></small></p>
-             <p>
-                <ul class="social">
-                <li><a href="#" class="rss" title="Rss"><i class="fa fa-rss fa2"></i></a></li>
-                <li><a href="#" class="face" title="Facebook"><i class="fa fa-facebook fa2"></i></a></li>
-                <li><a href="#" class="twit" title="Twitter"><i class="fa fa-twitter fa2"></i></a></li>
-                <li><a href="#" class="google" title="Google +"><i class="fa fa-google-plus fa2"></i></a></li>
-                <li><a href="#" class="linkedin" title="Linkedin"><i class="fa fa-linkedin fa2"></i></a></li>
-            </ul>
-             </p>
-             
-               
-            
-            
-                                                      
+    <!-- Main content -->
+    <section class="content">
+
      
-    </div>
-</div>
-</div>
 
-</div>
 <div class="row">
 
 <div  class="container"> 
@@ -250,44 +238,12 @@
 
 </div>
          </div>
-         </div>
-         </div>
-
-
-
         
 
-
-            
-                    	
-
-
-
+    </section>
+    <!-- /.content -->
+  </div>
+  <!-- /.content-wrapper -->
 
 
-
-
-
-
-
-
-
-
-
-
-    
-        
-                       
-                         
-                        
-                            
-                    
-                        
-                       
-
-
-
-
-
- 
 @endsection

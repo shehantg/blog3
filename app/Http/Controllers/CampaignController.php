@@ -169,5 +169,25 @@ public function publish(Request $request, $id)
 
          return view('Campaigns/campaignsdisplay',['campaign' => $campaign,'slider' => $slider,'donations' => $donations]);
     }
+
+    public function deletedonation(Request $request,$ID,$id){
+
+
+           
+
+           $donation = Donation::where('id',$id)->delete();
+
+           $campaign = Campaign::find($ID);
+
+        $sliderName = $campaign->slider;
+
+        $slider = Slider::where('body', $sliderName)->first();
+
+         $donations = Donation::where('donationable_id',$id)->where('donationable_type','App\Campaign')->get();
+ 
+        return view('Campaigns/campaignsdisplay',['campaign' => $campaign,'slider' => $slider,'donations' => $donations]);
+
 }
 
+
+}

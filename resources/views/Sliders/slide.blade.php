@@ -1,10 +1,30 @@
-@extends('layouts.app')
+@extends('layouts.dashboard')
 
 @section('content')
 
-<div class="container">
+ <!-- Content Wrapper. Contains page content -->
+  <div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+      <h1>
+        Page Header
+        <small>Optional description</small>
+      </h1>
+      <ol class="breadcrumb">
+        <li><a href="#"><i class="fa fa-dashboard"></i> Level</a></li>
+        <li class="active">Here</li>
+      </ol>
+    </section>
+
+    <!-- Main content -->
+    <section class="content">
+
+     
+
+
+
  <div class="row">
- <div class="col-md-12">
+ <div class="col-md-6 col-md-offset-3">
 
 
 
@@ -104,8 +124,7 @@
         </div>
 
 
- </div>
-
+ 
 
 
 
@@ -113,8 +132,10 @@
 
 
 @foreach($slides as $slide)
-<hr>
-<div class="container">
+ <div class="row">
+ <div class="col-md-12">
+
+
 
 <h3 class="text-center">SlideNo {{$loop->index}}</h3>
 <div class="col-md-6 col-md-offset-3">
@@ -205,10 +226,10 @@
 
                 
                       
-                        <button type="submit" class="btn btn-primary" id="createAdventureButton">
+                        <button type="submit" class="btn btn-block btn-warning btn-flat" id="createAdventureButton">
                                     EDIT
                                 </button>
-
+                               
 
 </div>
 
@@ -224,7 +245,7 @@
 <form novalidate="novalidate" class="form-horizontal" method="POST"  action="/slide/{{$slide->id}}/delete" >
                         {{ csrf_field() }}
 
-                        <button type="submit" class="btn btn-danger" id="createAdventureButton">DELETE</button>
+                        <button type="submit" class="btn btn-block btn-danger btn-flat" id="createAdventureButton">DELETE</button>
 </form>
                                  
                                   
@@ -234,8 +255,18 @@
                             </div>
                     </div>
                     </div>
+                    </div>
+          
 
 @endforeach
+
+        
+
+    </section>
+    <!-- /.content -->
+  </div>
+  <!-- /.content-wrapper -->
+
 
 
 

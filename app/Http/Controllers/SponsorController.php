@@ -22,7 +22,57 @@ class SponsorController extends Controller
 
     	$sponsor = new Sponsor ; 
     	$sponsor->photo = $request->filename->store('public/sponsors');
+        $sponsor->status = false;
     	$sponsor->save();
     	
     }
+
+    public function showall(){
+
+
+        $Allsponsors = Sponsor::all();
+
+        return view('Sponsors/index',['Allsponsors' => $Allsponsors]);
+    }
+
+
+    public function publish(Request $request,$id){
+
+
+        $sponsor = Sponsor::find($id);
+         
+
+        if($sponsor->status){
+
+           Sponsor::where('id',$sponsor->id)->update(['status' => 0]);
+
+        }
+
+        else
+        {
+             Sponsor::where('id',$sponsor->id)->update(['status' => 1]);
+
+        }
+
+        $Allsponsors = Sponsor::all();
+
+        return view('Sponsors/index',['Allsponsors' => $Allsponsors]);
+    }
+
+
+
+    public function delete(Request $request,$id){
+
+
+            $sponsor = Sponsor::find($id)->delete();
+
+            $Allsponsors = Sponsor::all();
+
+        return view('Sponsors/index',['Allsponsors' => $Allsponsors]);
+
+
+    }
+
+
+
 }

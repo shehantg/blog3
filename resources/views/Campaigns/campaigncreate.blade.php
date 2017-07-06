@@ -1,13 +1,27 @@
-@extends('layouts.app')
+@extends('layouts.dashboard')
 @section('css')
     <link rel="stylesheet" href="https://cdn.rawgit.com/Eonasdan/bootstrap-datetimepicker/e8bddc60e73c1ec2475f827be36e1957af72e2ea/build/css/bootstrap-datetimepicker.css">
 @endsection
 @section('content')
 
+<div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+      <h1>
+        Page Header
+        <small>Optional description</small>
+      </h1>
+      <ol class="breadcrumb">
+        <li><a href="#"><i class="fa fa-dashboard"></i> Level</a></li>
+        <li class="active">Here</li>
+      </ol>
+    </section>
 
+    <!-- Main content -->
+    <section class="content">
 
-<div class="container">
-    <div class="row">
+     
+<div class="row">
         <div class="col-md-12">
            
                <h1>Create New Campaign</h1>
@@ -204,7 +218,7 @@
 
                         <div class="form-group">
                             <div class="col-md-8 col-md-offset-2">
-                                <button type="submit" class="btn btn-primary" id="createAdventureButton">
+                                <button type="submit" class="btn btn-block btn-primary btn-flat" id="createAdventureButton">
                                     Create
                                 </button>
 
@@ -215,14 +229,22 @@
                 </div>
             </div>
         </div>
-    </div>
-</div>
+
+
+        
+
+    </section>
+    <!-- /.content -->
+  </div>
+
+
+    
+
 @endsection
 
 
 @section('scripts')
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+
         <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.12.0/moment-with-locales.min.js"></script>
     <script src="https://cdn.jsdelivr.net/bootstrap.datetimepicker/4.17.37/js/bootstrap-datetimepicker.min.js"></script>
 

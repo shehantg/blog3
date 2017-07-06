@@ -7,6 +7,11 @@
 		<div class="col-md-12">
 			<h3>Download this Volunteer Application Form.Submit it below with your details</h3>
 
+           <p> <a href="/applications/International Volunteer Application Form 2013.doc"> Internation Volunteer Application</a></p>
+
+         <p>   <a href="/applications/Local volunteer form 2013.doc"> Local Volunteer Application</a></p>
+
+
 			<form novalidate="novalidate" class="form-horizontal" method="POST"  action="/volunteer/register" enctype="multipart/form-data">
 				{{ csrf_field() }}
 
@@ -39,10 +44,10 @@
                     </div>
 
                     <div class="form-group{{ $errors->has('cv') ? ' has-error' : '' }}">
-                            <label for="photos" class="col-md-4 control-label">Image
+                            <label for="photos" class="col-md-4 control-label">Upload your CV
                             </label>
 
-                            <div class="col-md-12">
+                            <div class="col-md-6">
                                 <input id="photos" type="file" class="form-control" name="cv"  value="{{ old('cv') }}" required> 
 
                                 @if ($errors->has('cv'))
@@ -54,9 +59,9 @@
                     </div>
 
                     <div class="form-group">
-                            <div class="col-md-8 col-md-offset-2">
+                            <div class="col-md-12 col-md-offset-3">
                                 <button type="submit" class="btn btn-primary" id="createAdventureButton">
-                                    Create
+                                    Register
                                 </button>
 
                                  

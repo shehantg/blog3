@@ -1,29 +1,47 @@
-@extends('layouts.app')
+@extends('layouts.dashboard')
 
 @section('content')
 
-<div class="container">
-	<div class="row">
-		<div class="col-md-12">
-		<label>Title</label>
-		<p>{{$campaign->title}}</p>
+ <div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+      <h1>
+        Page Header
+        <small>Optional description</small>
+      </h1>
+      <ol class="breadcrumb">
+        <li><a href="#"><i class="fa fa-dashboard"></i> Level</a></li>
+        <li class="active">Here</li>
+      </ol>
+    </section>
 
-		<label>body</label>
-		<p>{!! $campaign->body !!}</p>
+    <!-- Main content -->
+    <section class="content">
 
-		<label>date</label>
-		<p>{{$campaign->date}}</p>
+     
 
-		<label>Fundraising Goal</label>
-		<p>{{$campaign->fundraising_goal}}</p>
 
-			<label>Venue</label>
-		<p>{{$campaign->venue}}</p>
+        <div class="row">
+    <div class="col-md-12">
+    <label>Title</label>
+    <p>{{$campaign->title}}</p>
 
-		<label>User</label>
-		<p>{{$campaign->user->first_name}} {{$campaign->user->last_name}}</p>
+    <label>body</label>
+    <p>{!! $campaign->body !!}</p>
 
-		
+    <label>date</label>
+    <p>{{$campaign->date}}</p>
+
+    <label>Fundraising Goal</label>
+    <p>{{$campaign->fundraising_goal}}</p>
+
+      <label>Venue</label>
+    <p>{{$campaign->venue}}</p>
+
+    <label>User</label>
+    <p>{{$campaign->user->first_name}} {{$campaign->user->last_name}}</p>
+
+    
 
 
 @if (isset($campaign->video))
@@ -99,9 +117,11 @@
 @endif
 
  @if(Auth::id() == $campaign->user->id)
+ <div class="row text-center">
 
- <a href="/campaign/{{$campaign->id}}/cpcreatedonation">Add a donation option </a>
 
+ <a href="/campaign/{{$campaign->id}}/cpcreatedonation" class="btn bg-maroon btn-flat margin">Add a donation option </a>
+</div>
  @endif
 
  
@@ -131,8 +151,18 @@
 
 <td>{{$donation->program_scheme}}</td>
 <td>{{$donation->amount}}</td>
-<td><button class="btn btn-primary">DONATE</button></td>
 
+
+<td><button class="btn btn-primary">DONATE</button></td>
+ @if(Auth::id() == $campaign->user->id)
+ <td>
+<form novalidate="novalidate" class="form-horizontal" method="POST"  action="/campaign/{{$campaign->id}}/{{$donation->id}}/delete" >
+                        {{ csrf_field() }}
+       <button type="submit" class="btn btn-block btn-danger btn-flat">Delete</button>
+
+       </form>
+       </td>
+ @endif
 
 
 </tr>
@@ -143,8 +173,13 @@
 
 
 
-		</div>
-	</div>
+    </div>
+
 
 </div>
+
+    </section>
+    <!-- /.content -->
+  </div>
+	
 @endsection

@@ -4,6 +4,11 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
+use App\Volunteer;
+
+use App\Mail\VolunteerRegister;
+use Illuminate\Support\Facades\Mail;
+
 class VolunteerController extends Controller
 {
     public function create(){
@@ -22,5 +27,36 @@ class VolunteerController extends Controller
 
     		]);
 
+    	$volunteerNew = new Volunteer;
+
+        $volunteerNew->name = $request->name;
+         $volunteerNew->email = $request->email;
+    	 $volunteerNew->cv = $request->cv->store('public/cv');
+          $volunteerNew->save();
+
+
+
+
+           Mail::to('elanceshehan@gmail.com')->send(new VolunteerRegister($volunteerNew));
+
+           
+
     }
+
+    public function show(){
+
+
+
+        $allvolunteers = Volunteer::all();
+
+   
+        return view('Volunteers/profile',['allvolunteers' => $allvolunteers]);
+    }
+
+
+
+       
+
+       
+    
 }

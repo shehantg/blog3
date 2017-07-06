@@ -16,25 +16,21 @@ class TestimonialTableSeeder extends Seeder
         $newslide1->name = 'Shehan Gomes';
         $newslide1->photo = 'public/testimonials/BofJ4nPpfm4Qmap0b7ZwW9PI06a9euVMPA5GZPVT.jpeg';
 		$newslide1->body     ='<p>wdgdfgdgdgdgdgdgrdferyteryteryryrytefwef</p>';
+        $newslide1->status = 1;
         $newslide1->save();
 
         $newslide1 = new Testimonial();
         $newslide1->name = 'Shehan Gomes';
         $newslide1->photo = 'public/testimonials/BofJ4nPpfm4Qmap0b7ZwW9PI06a9euVMPA5GZPVT.jpeg';
         $newslide1->body     ='<p>wdgdfgdgdgdgdgdgrdferyteryteryryrytefwef</p>';
+        $newslide1->status = 1;
         $newslide1->save();
 
         $newslide1 = new Testimonial();
         $newslide1->name = 'Shehan Gomes';
         $newslide1->photo = 'public/testimonials/BofJ4nPpfm4Qmap0b7ZwW9PI06a9euVMPA5GZPVT.jpeg';
         $newslide1->body     ='<p>wdgdfgdgdgdgdgdgrdferyteryteryryrytefwef</p>';
-        $newslide1->save();
-
-
-        $newslide1 = new Testimonial();
-        $newslide1->name = 'Shehan Gomes';
-        $newslide1->photo = 'public/testimonials/BofJ4nPpfm4Qmap0b7ZwW9PI06a9euVMPA5GZPVT.jpeg';
-        $newslide1->body     ='<p>wdgdfgdgdgdgdgdgrdferyteryteryryrytefwef</p>';
+        $newslide1->status = 1;
         $newslide1->save();
 
 
@@ -42,6 +38,15 @@ class TestimonialTableSeeder extends Seeder
         $newslide1->name = 'Shehan Gomes';
         $newslide1->photo = 'public/testimonials/BofJ4nPpfm4Qmap0b7ZwW9PI06a9euVMPA5GZPVT.jpeg';
         $newslide1->body     ='<p>wdgdfgdgdgdgdgdgrdferyteryteryryrytefwef</p>';
+        $newslide1->status = 1;
+        $newslide1->save();
+
+
+        $newslide1 = new Testimonial();
+        $newslide1->name = 'Shehan Gomes';
+        $newslide1->photo = 'public/testimonials/BofJ4nPpfm4Qmap0b7ZwW9PI06a9euVMPA5GZPVT.jpeg';
+        $newslide1->body     ='<p>wdgdfgdgdgdgdgdgrdferyteryteryryrytefwef</p>';
+        $newslide1->status = 1;
         $newslide1->save();
     }
 }

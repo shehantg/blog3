@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Blog;
 use App\Role;
 use App\User;
+use App\BlogTag;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -190,7 +191,7 @@ if ($request->tags) {
 
             $currentTag = DB::table('tags')->where('name', $tag)->value('id');
 
-            DB::table('blog_tag')->insert([
+            BlogTag::create([
 
                 'blog_id' => $newStory->id, 
                 'tag_id' => $currentTag
@@ -203,6 +204,9 @@ if ($request->tags) {
             
          }
      }
+
+     $allTags = DB::table('tags')->pluck('name');
+        return view('blogcreate',['allTags' => $allTags]);
 
 }
 

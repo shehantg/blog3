@@ -1,10 +1,25 @@
-@extends('layouts.app')
+@extends('layouts.dashboard')
 
 @section('content')
 
+ <div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+      <h1>
+        Page Header
+        <small>Optional description</small>
+      </h1>
+      <ol class="breadcrumb">
+        <li><a href="#"><i class="fa fa-dashboard"></i> Level</a></li>
+        <li class="active">Here</li>
+      </ol>
+    </section>
 
-<div class="container">
-    <div class="row">
+    <!-- Main content -->
+    <section class="content">
+
+     
+<div class="row">
         <div class="col-md-12">
            
                <h1>Add New Sponsor</h1>
@@ -68,8 +83,15 @@
                 </div>
             </div>
         </div>
-    </div>
-</div>
+  
+
+        
+
+    </section>
+    <!-- /.content -->
+  </div>
+
+    
 @endsection
 
 

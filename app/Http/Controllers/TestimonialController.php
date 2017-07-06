@@ -40,4 +40,43 @@ class TestimonialController extends Controller
 
     	return view ('Testimonials/index',['testimonials' => $testimonials]);
     }
+
+
+
+    public function publish(Request $request,$id){
+
+
+        $testimonial = Testimonial::find($id);
+         
+
+        if($testimonial->status){
+
+           testimonial::where('id',$testimonial->id)->update(['status' => 0]);
+
+        }
+
+        else
+        {
+             testimonial::where('id',$testimonial->id)->update(['status' => 1]);
+
+        }
+
+        $testimonials = Testimonial::all();
+
+        return view ('Testimonials/index',['testimonials' => $testimonials]);
+    }
+
+
+
+    public function delete(Request $request,$id){
+
+
+            $testimonial = testimonial::find($id)->delete();
+
+            $testimonials = Testimonial::all();
+
+        return view ('Testimonials/index',['testimonials' => $testimonials]);
+
+
+    }
 }

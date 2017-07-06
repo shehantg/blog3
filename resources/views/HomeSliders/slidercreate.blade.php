@@ -1,11 +1,25 @@
-@extends('layouts.app')
+@extends('layouts.dashboard')
 
 @section('content')
 
+  <div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+      <h1>
+        Page Header
+        <small>Optional description</small>
+      </h1>
+      <ol class="breadcrumb">
+        <li><a href="#"><i class="fa fa-dashboard"></i> Level</a></li>
+        <li class="active">Here</li>
+      </ol>
+    </section>
 
+    <!-- Main content -->
+    <section class="content">
 
-<div class="container">
- <div class="row">
+     
+<div class="row">
  <div class="col-md-12">
 
 
@@ -71,7 +85,6 @@
         </div>
 
 
- </div>
 
 
 
@@ -83,7 +96,8 @@
 
 
 
- <div class="container">
+
+
  <div class="row">
 
  <div class="col-md-12">
@@ -134,9 +148,9 @@
       
 
                     @if($homeslider->status)
-         <button>Unpublish</button>
+         <button type="submit" class="btn btn-block btn-success btn-flat">Unpublish</button>
         @else
-        <button>Publish</button>
+        <button type="submit" class="btn btn-block btn-warning btn-flat">Publish</button>
         @endif    
 
 </form>
@@ -144,15 +158,15 @@
        <td>
 <form novalidate="novalidate" class="form-horizontal" method="POST"  action="/homeslider/{{$homeslider->id}}/delete" >
                         {{ csrf_field() }}
-       <button>Delete</button>
+       <button type="submit" class="btn btn-block btn-danger btn-flat">Delete</button>
 
        </form>
        </td>
 
-       <td><a href=" {{ url('/homeslide/'.$homeslider->id.'/create') }} ">Add Sldes</a></td>
+       <td><a href=" {{ url('/homeslide/'.$homeslider->id.'/create') }} " class="btn btn-block btn-info btn-flat">Add Sldes</a></td>
 
        
-      <td><a href=" {{ url('homeslider/'.$homeslider->id.'/show') }} ">Show Sldes</a></td>
+      <td><a href=" {{ url('homeslider/'.$homeslider->id.'/show') }} " class="btn btn-block btn-primary btn-flat">Show Sldes</a></td>
 </tr>
 
 @endforeach
@@ -166,8 +180,17 @@
  </div>
 
 </div>
-</div>
 
+
+
+        
+
+    </section>
+    <!-- /.content -->
+  </div>
+
+
+ 
 
  @endsection
 

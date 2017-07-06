@@ -349,6 +349,14 @@ Route::POST('/campaign/{id}/cpcreatedonation',[
 
 	]);
 
+Route::POST('/campaign/{ID}/{id}/delete',[
+	'uses' => 'CampaignController@deletedonation',
+	'middleware' => 'roles',
+	'roles'  => ['Admin']
+
+	]);
+
+
 
 //show all campaigns
 
@@ -660,6 +668,23 @@ Route::POST('/testimonial-dg/create',[
 
 	]);
 
+Route::POST('/testimonial/{id}/publish',[
+	'uses' => 'TestimonialController@publish',
+	'middleware' => 'roles',
+	'roles'  => ['Admin']
+
+
+	]);
+Route::POST('/testimonial/{id}/delete',[
+	'uses' => 'TestimonialController@delete',
+	'middleware' => 'roles',
+	'roles'  => ['Admin']
+
+
+	]);
+
+
+
 
 //CREATE SPONSORS
 
@@ -680,22 +705,41 @@ Route::POST('/sponsor/create',[
 	]);
 
 
+//show all sponsors
+
+Route::get('/sponsors/show',[
+	'uses' => 'SponsorController@showall',
+	'middleware' => 'roles',
+	'roles'  => ['Admin']
+
+
+	]);
+
+//publish volunteer
+
+Route::post('/sponsor/{id}/publish',[
+	'uses' => 'SponsorController@publish',
+	'middleware' => 'roles',
+	'roles'  => ['Admin']
+
+
+	]);
+
+Route::post('/sponsor/{id}/delete',[
+	'uses' => 'SponsorController@delete',
+	'middleware' => 'roles',
+	'roles'  => ['Admin']
+
+
+	]);
 //Volunteer Controller
 
 // Register a volunteer
 
-Route::get('/volunteer/register',[
-	'uses' => 'VolunteerController@create',
-	'middleware' => 'roles',
-	'roles'  => ['Admin']
+Route::get('/volunteer/register','VolunteerController@create');
 
+Route::POST('/volunteer/register','VolunteerController@register');
 
-	]);
+// show all volunteers
 
-Route::POST('/volunteer/register',[
-	'uses' => 'VolunteerController@register',
-	'middleware' => 'roles',
-	'roles'  => ['Admin']
-
-
-	]);
+Route::get('/volunteers/show','VolunteerController@show');

@@ -1,16 +1,27 @@
-@extends('layouts.app')
+@extends('layouts.dashboard')
 
 @section('content')
 
 
     
 
-    
-    
-    
-       
-       
+    <div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+      <h1>
+        Page Header
+        <small>Optional description</small>
+      </h1>
+      <ol class="breadcrumb">
+        <li><a href="#"><i class="fa fa-dashboard"></i> Level</a></li>
+        <li class="active">Here</li>
+      </ol>
+    </section>
 
+    <!-- Main content -->
+    <section class="content">
+
+     
 <table class="table table-striped">
     <thead>
       <tr>
@@ -54,7 +65,7 @@
         <td>{{$user->email}}</td>
         
        
-       <td> <a href="{{ url('user/'.$user->id) }}"><button>Assign Roles</button></a></td>
+       <td> <a href="{{ url('user/'.$user->id) }}"><button class="btn btn-block btn-info btn-flat">Assign Roles</button></a></td>
       </tr>
    
 
@@ -65,6 +76,18 @@
       
     </tbody>
   </table>
+
+        
+
+    </section>
+    <!-- /.content -->
+  </div>
+    
+    
+       
+       
+
+
      
 
         

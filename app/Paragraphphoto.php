@@ -14,7 +14,7 @@ class Paragraphphoto extends Model
 
     public function paragraph()
     {
-    	return $this->belongsTo('App\Paragraph','id');
+    	return $this->belongsTo('App\Paragraph');
     }
 
     

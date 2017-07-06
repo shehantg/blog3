@@ -18,6 +18,7 @@ class CreateTestimonialsTable extends Migration
             $table->string('name');
             $table->string('body');
             $table->string('photo');
+            $table->boolean('status');
             $table->timestamps();
         });
     }
